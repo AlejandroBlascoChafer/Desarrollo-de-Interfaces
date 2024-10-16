@@ -38,6 +38,7 @@
      window->setLayout(layout);
 
      window->show();
+     
 
      return app.exec();
  }
