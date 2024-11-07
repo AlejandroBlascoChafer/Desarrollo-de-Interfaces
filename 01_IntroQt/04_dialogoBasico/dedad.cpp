@@ -1,48 +1,41 @@
 #include "dedad.h"
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
-Dedad::DEdad(QWidget* parent){
 
-	QVBoxLayout *principal = new QVBoxLayout();
-	QHBoxLayout *layoutSuperior = new QHBoxLayout();
-	QHBoxLayout *layoutInferior = new QHBoxLayout();
-	
-	sb_edad = new QSpinBox;
-	sb_edad->setRange(0,100);
-	sb_edad->setValue(15);
-	
-	String mayor = "Eres mayor de edad";
-	String menor = "No eres mayor de edad";
-	
-	etiq_info = new QLabel;
+
+DEdad::DEdad(QWidget* parent) {
+
+	etiq_info = new QLabel();
 	etiq_edad = new QLabel("Edad: ");
+	sb_edad = new QSpinBox();
 	
 	
-	
-	if (sb_edad->value() >= 18){
-		QObject::connect(sb_edad, SIGNAL(valueChanged(int)),
-			 etiq_info, SLOT(setText(mayor)));	
-	} else {
-		QObject::connect(sb_edad, SIGNAL(valueChanged(int)),
-			 etiq_info, SLOT(setText(menor)));
-	}
-	
-	principal->addLayout(layoutSuperior);
-	principal->addLayout(layoutInferior);
+	QHBoxLayout *layoutSuperior = new QHBoxLayout();
 	layoutSuperior->addWidget(etiq_edad);
 	layoutSuperior->addWidget(sb_edad);
-	layoutInferior->addWidget(etiq_info);
 	
 	
+	QVBoxLayout *layoutPrincipal = new QVBoxLayout();
+	layoutPrincipal->addLayout(layoutSuperior);
+	layoutPrincipal->addWidget(etiq_info);
+	
+	
+	
+	
+	
+	connect(sb_edad, SIGNAL(valueChanged(int)), this, SLOT(slotInformar(int)));
+	
+	setLayout(layoutPrincipal);
+	
+}
 
-	
-	
-	
-	
-	setLayout(principal);
-	
-	
-	
-
-
-
+void DEdad::slotInformar(int edad) {
+		
+		if (edad >= 18) {
+			etiq_info->setText("Eres Mayor de edad");
+		} else {
+			etiq_info->setText("Eres Menor de edad");
+		}	
+		
 }

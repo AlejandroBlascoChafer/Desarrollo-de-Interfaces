@@ -1,12 +1,13 @@
 #include <QApplication>
-#include "dedad.h"
+
+#include "dTransferencia.h"
 	
 int main(int argc, char *argv[]) {
 
   	QApplication app(argc, argv);
   	
-  	DEdad dEdad;
-  	dEdad.show();
+  	DTransferencia *dTransferencia = new DTransferencia();
+  	dTransferencia->show();
   	
 
   	
