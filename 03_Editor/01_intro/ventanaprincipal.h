@@ -15,6 +15,7 @@ Q_OBJECT
 	QAction *accionSalir;
 	QAction *accionAbrir;
 	QAction *accionGuardarComo;
+	QAction *accionNuevo;
 	QMenuBar *barraMenu;
 	QMenu *menuArchivo;
 	QMenu *menuEditar;
@@ -23,6 +24,7 @@ Q_OBJECT
 	QLabel *etiquetaEstado;
 public:
 	VentanaPrincipal(QWidget *parent = NULL);
+	bool modificado;
 	
 	void crearActions();
 	void crearMenus();
@@ -33,6 +35,8 @@ public slots:
 	void slotAbrir();
 	void slotGuardarComo();
 	void slotCursor(QTextCursor);
+	void slotNuevo();
+	void slotModificado();
 	
 
 
