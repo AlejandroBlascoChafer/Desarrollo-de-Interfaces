@@ -8,6 +8,8 @@
 #include <QTextEdit>
 #include <QToolBar>
 #include <QLabel>
+#include <QCloseEvent>
+#include <QAction>
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -15,6 +17,7 @@ Q_OBJECT
 	QAction *accionSalir;
 	QAction *accionAbrir;
 	QAction *accionGuardarComo;
+	QAction *accionGuardar;
 	QAction *accionNuevo;
 	QMenuBar *barraMenu;
 	QMenu *menuArchivo;
@@ -22,19 +25,28 @@ Q_OBJECT
 	QTextEdit *editorCentral;
 	QToolBar *barraPrincipal;
 	QLabel *etiquetaEstado;
+	bool modificado;
+	QString rutaArchivoActual;
+	
+	QVector<QAction * > accionesRecientes;
+	
 public:
 	VentanaPrincipal(QWidget *parent = NULL);
-	bool modificado;
+	
 	
 	void crearActions();
 	void crearMenus();
 	void crearToolBar();
 	void crearStatusBar();
+	void closeEvent(QCloseEvent *event);
+	
+	bool guardarArchivo(QString ruta);
 	
 public slots:
 	void slotAbrir();
+	void slotGuardar();
 	void slotGuardarComo();
-	void slotCursor(QTextCursor);
+	void slotCursor(const QTextCursor&);
 	void slotNuevo();
 	void slotModificado();
 	
